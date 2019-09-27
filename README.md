@@ -1,1 +1,1 @@
-Jumia like app
+Jumia app

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+		.table .thead-dark th {
+  color: #fff;
+  background-color: #620000;
+  border-color: #FF8888;
+}
+</style>
+
+</head>
+
+<body>
+  {% if product %}
+	<!-- <button onclick=" doCsv()">export to csv</button> -->
+
+
+<div class="container" id="table">
+	<button class="btn btn-secondary" style="float:right;"><a href="{% url 'clear_data' %}">clear table</a></button>
+		<h3>Products</h2>
+
+
+			<div class="row">
+		     <div class="col-md-4"></div>
+				{% include 'massage.html' %}
+		     <div class="col-md-4"></div>
+
+		   </div>
+
+
+			<table class="table table-hover" id="mytable">
+				<thead class="thead-dark">
+					<tr>
+						<th>Item</th>
+						<th>Category</th>
+						<th>Price(per unit)</th>
+            <th>Quantity</th>
+						<th>Total</th>
+						<th>Commision(per unit)</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for p in product %}
+					<tr>
+						<th scope="row">{{p.item_name}}</th>
+						<td>{{p.get_cat_display}}</td>
+						<td>Ksh.{{p.price}}</td>
+            <td>{{p.quantity}}</td>
+						<td>Ksh.{{p.total}}</td>
+						<td>Ksh.{{p.commision}}</td>
+
+					</tr>
+
+				</tbody>
+				{% endfor %}
+				<tr><td></td><td></td><td></td><td></td><td>Total ksh.{{sum.total__sum}}</td></tr>
+			</table>
+      <button class="btn btn-secondary" style="float:right;"><a href="{% url 'download_csv' %}">download to csv</a></button>
+			<form action="{%url 'new_product'%}">
+				<input type="submit" class="btn btn-secondary" value="addProduct" />
+			</form>
+	{% else %}
+	<h1>No nothing in db!! </h1>
+	<form action="{%url 'new_product'%}">
+		<input type="submit" class="btn btn-secondary" value="addProduct" />
+	</form>
+
+	{%  endif %}
+	</div>
+</body>
+<script>
+ function doCsv(){
+	 var table=document.getElementById('mytable').innerHTML;
+	 var data= table.replace(/<thead>/g, '')
+	 .replace(/<\/thead>/g,'')
+	 .replace(/<tbody>/g,'')
+	 .replace(/<\/tbody>/g,'')
+	 .replace(/<tr>/g,'')
+	 .replace(/<\/tr>/g,'\r\n')
+	 .replace(/<th>/g,'')
+	 .replace(/<\/th>/g,';')
+	 .replace(/<td>/g,'')
+	 .replace(/<\/td>/g,';')
+	 .replace(/\t/g, '');
+	// alert(table);
+	var mylink=document.createElement('a');
+	mylink.download='csvname.csv';
+	mylink.href='data:producs/csv,'+ escape(data);
+	mylink.click();
+ }
+</script>
+
+</html>

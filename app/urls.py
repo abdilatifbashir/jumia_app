@@ -5,6 +5,8 @@ from . import views
 urlpatterns =[
     path(r'',views.prod,name='prod'),
     path('add',views.new_product,name='new_product'),
-    path('csv',views.download_csv,name='download_csv'),
+    path(r'csv/',views.export,name= 'export'),
+    path(r'exel/',views.export_exel,name= 'export_exel'),
     path('clear',views.clear_data,name='clear_data'),
+    path('clear/p',views.export_product_csv,name='export_product_csv'),
 ]

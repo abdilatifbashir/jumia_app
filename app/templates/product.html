@@ -41,29 +41,33 @@
 					<tr>
 						<th>Item</th>
 						<th>Category</th>
+						<th>Sub Category</th>
 						<th>Price(per unit)</th>
             <th>Quantity</th>
-						<th>Total</th>
 						<th>Commision(per unit)</th>
+						<th>Shipping(per unit)</th>
+						<th>Total</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for p in product %}
 					<tr>
-						<th scope="row">{{p.item_name}}</th>
-						<td>{{p.get_cat_display}}</td>
-						<td>Ksh.{{p.price}}</td>
-            <td>{{p.quantity}}</td>
-						<td>Ksh.{{p.total}}</td>
+						<th scope="row">{{p.item}}</th>
+						<td>{{p.category}}</td>
+						<td>Ksh.{{p.sub_category}}</td>
+            <td>{{p.price}}</td>
+						<td>{{p.quantity}}</td>
 						<td>Ksh.{{p.commision}}</td>
+						<td>Ksh.{{p.shipping}}</td>
+						<td>Ksh.{{p.total}}</td>
+
 
 					</tr>
 
 				</tbody>
 				{% endfor %}
-				<tr><td></td><td></td><td></td><td></td><td>Total ksh.{{sum.total__sum}}</td></tr>
 			</table>
-      <button class="btn btn-secondary" style="float:right;"><a href="{% url 'download_csv' %}">download to csv</a></button>
+      <button class="btn btn-secondary" style="float:right;color:white;"><a href="{% url 'export_product_csv' %}">download to csv</a></button>
 			<form action="{%url 'new_product'%}">
 				<input type="submit" class="btn btn-secondary" value="addProduct" />
 			</form>

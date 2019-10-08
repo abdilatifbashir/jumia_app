@@ -68,15 +68,18 @@ def export_exel(request):
 
 
 def export_product_csv(request):
+    '''
+    manual way to cssv
+    '''
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="product.csv"'
-
+    items = Product.objects.all()
     writer = csv.writer(response)
     writer.writerow(['Item', 'Category', 'Sub_category', 'Price per unit','Quantity','Shipping cost','Commision',])
 
-    product = Product.objects.all().values_list('item', 'category', 'sub_category', 'price','quantity','shipping','commision')
-    for p in product:
-        writer.writerow(p)
+
+    for obj in items:
+        writer.writerow([obj.item,obj.category,obj.sub_category,obj.price,obj.quantity,obj.shipping,obj.commision])
 
     return response
 
@@ -85,3 +88,15 @@ def clear_data(request):
     data = Product.objects.all()
     data.delete()
     return redirect('prod')
+
+
+
+
+def pload(request):
+    if request.POST and request.FILES:
+        csvfile = request.FILES['csv_file']
+        dialect = csv.Sniffer().sniff(codecs.EncodedFile(csvfile, "utf-8").read(1024))
+        csvfile.open()
+        reader = csv.reader(codecs.EncodedFile(csvfile, "utf-8"), delimiter=',', dialect=dialect)
+
+    return render(request, "upload.html", locals())

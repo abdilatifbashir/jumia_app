@@ -38,7 +38,19 @@ class Product(models.Model):
 
     commision = ComputedFloatField(blank=True,compute_from='commision')
     shipping = ComputedFloatField(blank=True,compute_from='shipping')
-    amount_expected = ComputedFloatField(blank=True,compute_from='amount_expected')
+    amount_expected = models.FloatField(blank=True)
+
+
+    @property
+    def get_amount_expected(self):
+      return (self.price-(self.shipping+self.commision))*self.quantity
+    def save(self, *args, **kwargs):
+      self.amount_expected = self.get_amount_expected
+      super(Product, self).save(*args, **kwargs)
+
+    def __float__(self):
+       return self.amount_expected
+
 
     @property
     def commision(self):
@@ -49,13 +61,10 @@ class Product(models.Model):
     def shipping(self):
        return self.sub_category.shipping
 
-    @property
-    def amount_expected(self):
-        return (self.price-(self.shipping+self.commision))*self.quantity
+    # @property
+    # def amount_expected(self):
+    #     return (self.price-(self.shipping+self.commision))*self.quantity
 
 
     def __str__(self):
         return self.item
-
-# for instance in Product.objects.all().iterator():
-#       instance.save()

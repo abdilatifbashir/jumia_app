@@ -66,17 +66,31 @@
 
 				</tbody>
 				{% endfor %}
+				<tr><td><td/><td><td/><td><td/><td></dt><td>Total  Ksh.{{sum.amount_expected__sum}}<td/></tr>
 			</table>
       <button class="btn btn-secondary" style="float:right;color:white;"><a href="{% url 'export_product_csv' %}" style="color:white;">download to csv</a></button>
 			<form action="{%url 'new_product'%}">
 				<input type="submit" class="btn btn-secondary" value="addProduct" />
 			</form>
 	{% else %}
-	<h1>No nothing in db!! </h1>
-	<form action="{%url 'new_product'%}">
-		<input type="submit" class="btn btn-secondary" value="addProduct" />
-	</form>
 
+				<table class="table table-hover" id="mytable">
+					<thead class="thead-dark">
+						<tr>
+							<th>Item</th>
+							<th>Category</th>
+							<th>Sub Category</th>
+							<th>Price(per unit)</th>
+	            <th>Quantity</th>
+							<th>Commision(per unit)</th>
+							<th>Shipping cost(per unit)</th>
+							<th>Expected Amount</th>
+						</tr>
+					</thead>
+				</table>
+				<form action="{%url 'new_product'%}">
+					<input type="submit" class="btn btn-secondary" value="addProduct" />
+				</form>
 	{%  endif %}
 	</div>
 </body>

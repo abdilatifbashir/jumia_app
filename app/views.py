@@ -1,4 +1,5 @@
 import csv
+import xlwt
 from django.shortcuts import render,redirect
 from django.http import Http404,HttpResponse,HttpResponseRedirect,HttpResponse
 from django.shortcuts import render,redirect,get_object_or_404
@@ -14,8 +15,8 @@ from . resources import *
 
 def prod(request):
     product = Product.objects.all().order_by('-id')
-    # sum = Product.objects.aggregate(Sum('total'))
-
+    sum = Product.objects.aggregate(Sum('amount_expected'))
+    print(sum)
     return render(request,'product.html',{'product':product,'sum':sum})
     # return HttpResponse('God help us here')
 

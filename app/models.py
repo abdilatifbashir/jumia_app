@@ -52,7 +52,7 @@ class Product(models.Model):
     # shipping = property(_get_shipping)
 
     @property
-    def shipping(self):
+    def shippihng(self):
        return self.sub_category.shipping
 
 
@@ -68,5 +68,4 @@ class Product(models.Model):
     def __str__(self):
         return self.item
     
-for instance in Product.objects.all().iterator():
-      instance.save()
+

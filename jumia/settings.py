@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'import_export',
     'computed_property',
+    'hr'
 ]
 
 MIDDLEWARE = [

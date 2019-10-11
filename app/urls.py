@@ -10,4 +10,5 @@ urlpatterns =[
     path(r'exel/',views.export_exel,name= 'export_exel'),
     path('clear',views.clear_data,name='clear_data'),
     path('clear/p',views.export_product_csv,name='export_product_csv'),
+    path('pload',views.pload,name='pload'),
 ]

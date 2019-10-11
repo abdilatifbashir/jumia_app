@@ -5,7 +5,7 @@
 
   <h2>Product Form</h2>
 
-  <form method="post" id="productForm" data-subcategories-url="{% url 'ajax_load_subcategories' %}" novalidate>
+  <form method="post" id="newproductForm" data-sub_categories-url="{% url 'ajax_load_sub_categories' %}" novalidate>
     {% csrf_token %}
     <table>
       {{ form.as_table }}
@@ -18,7 +18,7 @@
   <script>
 
     $("#id_category").change(function () {
-      var url = $("#productForm").attr("data-subcategories-url");
+      var url = $("#newproductForm").attr("data-sub_categories-url");
       var categoryId = $(this).val();
 
       $.ajax({
@@ -27,7 +27,7 @@
           'category': categoryId
         },
         success: function (data) {
-          $("#id_subcategory").html(data);
+          $("#id_sub_category").html(data);
         }
       });
 

@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Product, Category, Subcategory
+from .models import Product, Category, Sub_category
 
 
 # class ProductAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'category', 'subcategory')
-#     list_filter = ("category,subcategory",)
+#     list_display = ('name', 'category', 'Sub_category')
+#     list_filter = ("category,Sub_category",)
 #     prepopulated_fields = {'slug': ('name',)}
     
 #     admin.site.register(Product, ProductAdmin)
@@ -20,7 +20,7 @@ from .models import Product, Category, Subcategory
 
 
 
-# class SubcategoryAdmin(admin.ModelAdmin):
+# class Sub_categoryAdmin(admin.ModelAdmin):
 #     list_display = ['name', 'slug', 'comission', 'quantity', ]
 #     prepopulated_fields = {'slug': ('name',)}
 
@@ -29,4 +29,4 @@ from .models import Product, Category, Subcategory
 
 admin.site.register(Category)
 admin.site.register(Product)
-admin.site.register(Subcategory)
+admin.site.register(Sub_category)

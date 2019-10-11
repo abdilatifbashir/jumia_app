@@ -7,9 +7,16 @@ from computed_property import ComputedTextField, ComputedFloatField
 
 
 # Create your models here.
+class Category(models.Model):
+    category = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.category
+
 
 class Sub_category(models.Model):
     sub_category = models.CharField(max_length=400)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank =True, null=True)
     shipping = models.FloatField(blank =True)
     commision = models.FloatField()
 
@@ -18,12 +25,6 @@ class Sub_category(models.Model):
 
 
 
-class Category(models.Model):
-    category = models.CharField(max_length=200)
-
-
-    def __str__(self):
-        return self.category
 
 
 

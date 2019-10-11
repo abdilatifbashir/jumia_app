@@ -1,8 +1,7 @@
-from django.shortcuts import render
+
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
-
-from .models import Product, Subcategory
+from .models import Product, Sub_category
 from .forms import ProductForm
 
 
@@ -23,7 +22,7 @@ class ProductUpdateView(UpdateView):
     success_url = reverse_lazy('product_changelist')
 
 
-def load_subcategories(request):
+def load_sub_categories(request):
     category_id = request.GET.get('category')
-    subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')
-    return render(request, 'hr/subcategory_dropdown_list_options.html', {'subcategories': subcategories})
+    sub_categories = Sub_category.objects.filter(category_id=category_id).order_by('id')
+    return render(request, 'hr/sub_category_dropdown_list_options.html', {'sub_categories': sub_categories})

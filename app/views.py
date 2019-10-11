@@ -10,6 +10,7 @@ from tablib import  Dataset
 from . resources import *
 
 
+
 # Create your views here.
 
 def prod(request):
@@ -39,6 +40,17 @@ def new_product(request):
         form= NewProductForm()
 
     return render(request, 'new_product.html', {'form':form})
+
+# def load_sub_categories(request):
+#     category_id = request.GET.get('category')
+#     sub_categories = Sub_category.objects.filter(category_id=category_id).order_by('name')
+#     return render(request, 'sub_category_dropdown_list_options.html', {'sub_categories': sub_categories})    
+
+
+def load_sub_categories(request):
+    category_id = request.GET.get('category')
+    sub_categories = Sub_category.objects.filter(category_id=category_id).order_by('id')
+    return render(request, 'hr/sub_category_dropdown_list_options.html', {'sub_categories': sub_categories})
 
 
 

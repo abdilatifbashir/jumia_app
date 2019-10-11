@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from django.db import Q
+from django.db.models import Q
 
 class EmailAuthenticate(object):
 

@@ -106,9 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
-  'account.backends.EmailAuthenticate',
-)
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -117,6 +115,12 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'softsearchlimited@gmail.com'
+EMAIL_HOST_PASSWORD = 'Bashir_@12'
+EMAIL_PORT = 587
 
 USE_L10N = True
 

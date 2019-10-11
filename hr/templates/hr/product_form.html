@@ -5,7 +5,7 @@
 
   <h2>Product Form</h2>
 
-  <form method="post" id="productForm" data-cities-url="{% url 'ajax_load_subcategories' %}" novalidate>
+  <form method="post" id="productForm" data-subcategories-url="{% url 'ajax_load_subcategories' %}" novalidate>
     {% csrf_token %}
     <table>
       {{ form.as_table }}

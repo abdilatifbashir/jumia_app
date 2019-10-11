@@ -9,20 +9,21 @@ from django.contrib import messages
 from django.db.models import Sum
 from tablib import  Dataset
 from . resources import *
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
+@login_required(login_url='account:login')
 def prod(request):
-    product = Product.objects.all().order_by('-id')
-    sum = Product.objects.aggregate(Sum('amount_expected'))
-    print(sum)
+    current_user = request.user
+    product = Product.objects.filter(vendor=current_user).order_by('-id')
+    sum = Product.objects.filter(vendor=current_user).aggregate(Sum('amount_expected'))
     return render(request,'product.html',{'product':product,'sum':sum})
     # return HttpResponse('God help us here')
 
-
+@login_required
 def new_product(request):
-    # current_user = request.user
+    current_user = request.user
     if request.method == 'POST':
         form = NewProductForm(request.POST,request.FILES)
         if form.is_valid():
@@ -32,6 +33,7 @@ def new_product(request):
             product.sub_category = form.cleaned_data['sub_category']
             product.price = form.cleaned_data['price']
             product.quantity = form.cleaned_data['quantity']
+            product.vendor = current_user
             product.save()
             messages.success(request,'product added successfuly')
             return redirect('prod')
@@ -72,9 +74,10 @@ def export_product_csv(request):
     '''
     manual way to cssv
     '''
+    current_user = request.user
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="product.csv"'
-    items = Product.objects.all()
+    items = Product.objects.filter(vendor=current_user).order_by('-id')
     writer = csv.writer(response)
     writer.writerow(['Item', 'Category', 'Sub_category', 'Price per unit','Quantity','Shipping cost','Commision',])
 
@@ -86,7 +89,8 @@ def export_product_csv(request):
 
 
 def clear_data(request):
-    data = Product.objects.all()
+    current_user = request.user
+    data = Product.objects.filter(vendor=current_user)
     data.delete()
     return redirect('prod')
 

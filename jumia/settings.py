@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'bootstrap4',
+    'crispy_forms',
     'import_export',
     'computed_property',
 ]
@@ -58,6 +60,7 @@ ROOT_URLCONF = 'jumia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -103,7 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTHENTICATION_BACKENDS = (
+  'account.backends.EmailAuthenticate',
+)
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 

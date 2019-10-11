@@ -2,6 +2,8 @@ from django.db import models
 from model_utils import Choices
 from django.core.validators import MaxValueValidator, MinValueValidator
 from computed_property import ComputedTextField, ComputedFloatField
+from django.contrib.auth.models import User
+
 
 
 
@@ -33,12 +35,13 @@ class Product(models.Model):
     category = models.ForeignKey(Category,max_length= 200, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(Sub_category,max_length= 200,on_delete=models.CASCADE,related_name='cats',)
     price = models.FloatField()
-
+    vendor = models.ForeignKey(User,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1,validators=[MinValueValidator(1)])
 
     commision = ComputedFloatField(blank=True,compute_from='commision')
     shipping = ComputedFloatField(blank=True,compute_from='shipping')
     amount_expected = models.FloatField(blank=True)
+
 
 
     @property

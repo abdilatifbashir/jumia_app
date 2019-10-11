@@ -67,6 +67,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.item
-    
+
 for instance in Product.objects.all().iterator():
       instance.save()

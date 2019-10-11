@@ -38,10 +38,19 @@
 					<span class="login100-form-title p-b-43">
 						Login to continue
 						  {% if form.errors %}
-                        <P style="color:red; font-size:16px;">
-                            Email or password incorrect!
-                        </P>
-                        {% endif %}
+						  {% for field in form %}
+                          {% for error in field.errors %}
+							<div class="alert alert-danger">
+								<strong style="font-size:15px">{{ error|escape }}</strong>
+							</div>
+						  {% endfor %}
+                          {% endfor %}
+							{% for error in form.non_field_errors %}
+								<div class="alert alert-danger">
+									<strong style="font-size:15px">{{ error|escape }}</strong>
+								</div>
+							{% endfor %}
+						   {% endif %}
 					</span>
 
 

@@ -51,6 +51,13 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ('username', 'email')
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Email addresses must be unique.')
+        return email
+
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:

@@ -8,10 +8,11 @@ from django.contrib import messages
 from django.db.models import Sum
 from tablib import  Dataset
 from . resources import *
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
+@login_required(login_url='account:login')
 def prod(request):
     product = Product.objects.all().order_by('-id')
     # sum = Product.objects.aggregate(Sum('total'))
@@ -19,7 +20,7 @@ def prod(request):
     return render(request,'product.html',{'product':product,'sum':sum})
     # return HttpResponse('God help us here')
 
-
+@login_required
 def new_product(request):
     # current_user = request.user
     if request.method == 'POST':

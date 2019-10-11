@@ -1,9 +1,10 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 
+
 urlpatterns =[
-    path(r'',views.prod,name='prod'),
+    re_path(r'^$',views.prod,name='prod'),
     path('add',views.new_product,name='new_product'),
     path(r'csv/',views.export,name= 'export'),
     path(r'exel/',views.export_exel,name= 'export_exel'),

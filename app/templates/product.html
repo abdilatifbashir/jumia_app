@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% extends 'base.html' %}
+{% block title %} Products {% endblock %}
+{% block body %}
 <style>
 		.table .thead-dark th {
   color: #fff;
@@ -15,16 +8,13 @@
   border-color: #FF8888;
 }
 </style>
-
-</head>
-
-<body>
-  {% if product %}
 	<!-- <button onclick=" doCsv()">export to csv</button> -->
 
 
 <div class="container" id="table">
+	{% if product %}
 	<button class="btn btn-secondary" style="float:right;"><a href="{% url 'clear_data' %}">clear table</a></button>
+	{% endif %}
 		<h3>Products</h2>
 
 
@@ -67,19 +57,13 @@
 				</tbody>
 				{% endfor %}
 			</table>
-      <button class="btn btn-secondary" style="float:right;color:white;"><a href="{% url 'export_product_csv' %}">download to csv</a></button>
+			{% if product %}
+	  <button class="btn btn-secondary" style="float:right;color:white;"><a href="{% url 'export_product_csv' %}">download to csv</a></button>
+	  {% endif %}
 			<form action="{%url 'new_product'%}">
 				<input type="submit" class="btn btn-secondary" value="addProduct" />
 			</form>
-	{% else %}
-	<h1>No nothing in db!! </h1>
-	<form action="{%url 'new_product'%}">
-		<input type="submit" class="btn btn-secondary" value="addProduct" />
-	</form>
-
-	{%  endif %}
 	</div>
-</body>
 <script>
  function doCsv(){
 	 var table=document.getElementById('mytable').innerHTML;
@@ -101,5 +85,4 @@
 	mylink.click();
  }
 </script>
-
-</html>
+{%endblock %}

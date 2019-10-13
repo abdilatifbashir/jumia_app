@@ -21,5 +21,7 @@ urlpatterns = [
     re_path(r'^accounts/', include('account.urls', namespace='account')),
     re_path(r'^account/', include('django.contrib.auth.urls')),
     re_path(r'^', include('app.urls')),
+    path('select2/', include('django_select2.urls')),
+    path('chaining/', include('smart_selects.urls')),
 
 ]

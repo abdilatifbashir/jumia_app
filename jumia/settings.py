@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'import_export',
     'computed_property',
+    'django_select2',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jumia.wsgi.application'
 
+DJANGO_JQUERY = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -126,6 +129,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_DJANGO_JQUERY = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

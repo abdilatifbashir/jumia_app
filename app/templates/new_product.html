@@ -12,7 +12,9 @@
     {{form.media}}
     {% block styles %}
     {% bootstrap_css %}
+    {{ form.media.css }}
     {% endblock %}
+
   </head>
   <body>
   <div class="container">
@@ -32,13 +34,14 @@
    {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %}
+
   {% endblock %}
 </div>
 
 </div>
 </div>
 
-
+   {{ form.media.js }}
   </body>
 </html>
 {% endblock %}

@@ -6,6 +6,7 @@ chardet==3.0.4
 defusedxml==0.6.0
 diff-match-patch==20181111
 Django==2.2.5
+django-allauth==0.40.0
 django-bootstrap4==1.0.1
 django-computed-property==0.3.0
 django-crispy-forms==1.7.2
@@ -14,9 +15,12 @@ django-model-utils==3.2.0
 et-xmlfile==1.0.1
 idna==2.8
 jdcal==1.4.1
+numpy==1.17.2
 oauthlib==3.1.0
 odfpy==1.4.0
 openpyxl==3.0.0
+pandas==0.25.1
+python-dateutil==2.8.0
 python3-openid==3.1.0
 pytz==2019.2
 PyYAML==5.1.2

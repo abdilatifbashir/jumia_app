@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Display Results{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Report</h1>
+    <hr>
+    <h3 style="font-weight:bold">NB: Highlight in red means that the prices conflict</h3>
+    {% for sa in same %}
+    <ul>
+        <li style="color:green">{{sa}}</li>
+    </ul>
+    {% endfor %}
+    {% for dif in different %}
+    <ul>
+        <li style="color:red">{{dif}}</li>
+    </ul>
+    {% endfor %}
+
+</div>
+{% endblock %}
